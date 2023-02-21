@@ -22,7 +22,7 @@ const pg = introspect.postgresql({
 
 // configureWunderGraph emits the configuration
 configureWunderGraphApplication({
-  apis: [spaceX],
+  apis: [spaceX, pg],
   server,
   operations,
   codeGenerators: [

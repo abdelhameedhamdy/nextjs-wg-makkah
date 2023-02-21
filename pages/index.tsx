@@ -3,7 +3,7 @@ import { useQuery, withWunderGraph } from "../components/generated/nextjs";
 
 const Home: NextPage = () => {
   const dragons = useQuery({
-    operationName: "Deeds",
+    operationName: "Dragons",
     liveQuery: true,
   });
   const refresh = () => {

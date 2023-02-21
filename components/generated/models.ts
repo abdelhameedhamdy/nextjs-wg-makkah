@@ -34,6 +34,11 @@ export interface InternalUsersUpdateInput {
 	bio: string;
 }
 
+export interface DeedsResponse {
+	data?: DeedsResponseData;
+	errors?: ReadonlyArray<GraphQLError>;
+}
+
 export interface DragonsResponse {
 	data?: DragonsResponseData;
 	errors?: ReadonlyArray<GraphQLError>;
@@ -52,6 +57,18 @@ export interface UsersSubscribeResponse {
 export interface UsersUpdateResponse {
 	data?: UsersUpdateResponseData;
 	errors?: ReadonlyArray<GraphQLError>;
+}
+
+export interface DeedsResponseData {
+	deeds: {
+		id: number;
+		parcel_key?: string;
+		deed_no?: number;
+		deed_source?: string;
+		parcels?: {
+			shape_area?: number;
+		};
+	}[];
 }
 
 export interface DragonsResponseData {

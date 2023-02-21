@@ -15,6 +15,8 @@ import {
 
 import type { CustomClaims } from "./claims";
 import type {
+	DeedsResponse,
+	DeedsResponseData,
 	DragonsResponse,
 	DragonsResponseData,
 	UsersGetResponse,
@@ -43,12 +45,15 @@ export interface AuthProvider {
 }
 
 export const defaultClientConfig: ClientConfig = {
-	applicationHash: "0825d4b6",
+	applicationHash: "e0dacfd9",
 	baseURL: "http://localhost:9991",
 	sdkVersion: "0.135.0",
 };
 
 export const operationMetadata: OperationMetadata = {
+	Deeds: {
+		requiresAuthentication: false,
+	},
 	Dragons: {
 		requiresAuthentication: false,
 	},
@@ -108,6 +113,12 @@ export const createClient = (config?: CreateClientConfig) => {
 };
 
 export type Queries = {
+	Deeds: {
+		input?: undefined;
+		data: DeedsResponseData;
+		requiresAuthentication: false;
+		liveQuery: boolean;
+	};
 	Dragons: {
 		input?: undefined;
 		data: DragonsResponseData;
@@ -139,6 +150,12 @@ export type Subscriptions = {
 };
 
 export type LiveQueries = {
+	Deeds: {
+		input?: undefined;
+		data: DeedsResponseData;
+		liveQuery: true;
+		requiresAuthentication: false;
+	};
 	Dragons: {
 		input?: undefined;
 		data: DragonsResponseData;
