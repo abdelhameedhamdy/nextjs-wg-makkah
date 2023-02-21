@@ -1,0 +1,10 @@
+query {
+  deeds: db_findManydeeds {
+    id
+    deed_no
+    deed_source
+    parcels {
+      area: shape_area
+    }
+  }
+}

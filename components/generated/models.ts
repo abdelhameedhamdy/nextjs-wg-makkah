@@ -56,6 +56,7 @@ export interface UsersUpdateResponse {
 
 export interface DragonsResponseData {
 	spacex_dragons?: {
+		id?: string;
 		name?: string;
 		active?: boolean;
 	}[];
