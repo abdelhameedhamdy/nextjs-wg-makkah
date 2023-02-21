@@ -22,6 +22,9 @@ import type {
 	UsersGetResponse,
 	UsersGetInput,
 	UsersGetResponseData,
+	UsersNewsfeedResponse,
+	UsersNewsfeedInput,
+	UsersNewsfeedResponseData,
 	UsersSubscribeResponse,
 	UsersSubscribeInput,
 	UsersSubscribeResponseData,
@@ -45,7 +48,7 @@ export interface AuthProvider {
 }
 
 export const defaultClientConfig: ClientConfig = {
-	applicationHash: "314d530f",
+	applicationHash: "06e6a902",
 	baseURL: "http://localhost:9991",
 	sdkVersion: "0.135.0",
 };
@@ -58,6 +61,9 @@ export const operationMetadata: OperationMetadata = {
 		requiresAuthentication: false,
 	},
 	"users/get": {
+		requiresAuthentication: false,
+	},
+	"users/newsfeed": {
 		requiresAuthentication: false,
 	},
 	"users/subscribe": {
@@ -142,6 +148,11 @@ export type Mutations = {
 };
 
 export type Subscriptions = {
+	"users/newsfeed": {
+		input: UsersNewsfeedInput;
+		data: UsersNewsfeedResponseData;
+		requiresAuthentication: false;
+	};
 	"users/subscribe": {
 		input: UsersSubscribeInput;
 		data: UsersSubscribeResponseData;
