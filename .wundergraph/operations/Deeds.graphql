@@ -4,8 +4,10 @@ query {
     parcel_key
     deed_no
     deed_source
+    deed_date
     parcels {
-      shape_area
+      area: shape_area
+      length: shape_len
     }
   }
 }

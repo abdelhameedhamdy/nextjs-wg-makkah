@@ -65,8 +65,10 @@ export interface DeedsResponseData {
 		parcel_key?: string;
 		deed_no?: number;
 		deed_source?: string;
+		deed_date?: string;
 		parcels?: {
-			shape_area?: number;
+			area?: number;
+			length?: number;
 		};
 	}[];
 }
