@@ -67,7 +67,7 @@ const Home: NextPage = () => {
               operation.
             </p>
             <code className="p-3" data-testid="result">
-              {JSON.stringify(dragons, null, 2)}
+              {JSON.stringify(dragons.data, null, 2)}
             </code>
           </div>
           <div className="flex justify-center mt-8">
