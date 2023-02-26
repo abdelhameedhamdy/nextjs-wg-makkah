@@ -3,11 +3,5 @@ query {
     id
     parcel_key
     deed_no
-    deed_source
-    deed_date
-    parcels {
-      area: shape_area
-      length: shape_len
-    }
   }
 }

@@ -5,6 +5,13 @@ export default createOperation.subscription({
   input: z.object({
     id: z.string(),
   }),
+  response: z.object({
+    user: z.object({
+      id: z.string(),
+      name: z.string(),
+      bio: z.string(),
+    }),
+  }),
   handler: async function* ({ input }) {
     try {
       const userPromise = Promise.resolve({
@@ -35,6 +42,7 @@ export default createOperation.subscription({
       yield {
         user: await userPromise,
         posts: await postsPromise,
+        // abdo: "hello Abdo",
       };
     } finally {
       console.log("Client disconnected");

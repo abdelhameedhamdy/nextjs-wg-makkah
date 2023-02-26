@@ -1,12 +1,24 @@
 import { NextPage } from "next";
-import { useQuery, withWunderGraph } from "../components/generated/nextjs";
+import {
+  useQuery,
+  useSubscription,
+  withWunderGraph,
+} from "../components/generated/nextjs";
 
 const Home: NextPage = () => {
   const dragons = useQuery({
     operationName: "Deeds",
     revalidateOnFocus: false,
     liveQuery: true,
+    // enabled: false,
   });
+
+  // const feeds = useSubscription({
+  //   operationName: "users/newsfeed",
+  //   input: {
+  //     id: "1",
+  //   },
+  // });
   const refresh = () => {
     dragons.mutate();
   };
