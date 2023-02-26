@@ -74,7 +74,6 @@ export interface UsersUpdateResponse {
 export interface DeedsResponseData {
 	deeds: {
 		id: number;
-		parcel_key?: string;
 		deed_no?: number;
 	}[];
 }
