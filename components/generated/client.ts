@@ -11,6 +11,7 @@ import {
 	SubscriptionRequestOptions,
 	SubscriptionEventHandler,
 	FetchUserRequestOptions,
+	UploadValidationOptions,
 } from "@wundergraph/sdk/client";
 
 import type { CustomClaims } from "./claims";
@@ -48,9 +49,9 @@ export interface AuthProvider {
 }
 
 export const defaultClientConfig: ClientConfig = {
-	applicationHash: "bb1868d1",
+	applicationHash: "4864c4fb",
 	baseURL: "http://localhost:9991",
-	sdkVersion: "0.137.0",
+	sdkVersion: "0.137.1",
 };
 
 export const operationMetadata: OperationMetadata = {
