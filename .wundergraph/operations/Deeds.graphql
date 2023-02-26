@@ -1,6 +1,11 @@
 query {
   deeds: db_findManydeeds {
     id
+    parcel_key
     deed_no
+    parcels {
+      area: shape_area
+      length: shape_len
+    }
   }
 }
