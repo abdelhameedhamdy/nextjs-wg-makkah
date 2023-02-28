@@ -13,18 +13,12 @@ const Home: NextPage = () => {
     // enabled: false,
   });
 
-  // const feeds = useSubscription({
-  //   operationName: "users/newsfeed",
-  //   input: {
-  //     id: "1",
-  //   },
-  // });
   const refresh = () => {
     dragons.mutate();
   };
   return (
     <div>
-      <div className="relative max-w-5xl mx-auto pt-20 sm:pt-24 lg:pt-32">
+      <div className="relative max-w-5xl pt-20 mx-auto sm:pt-24 lg:pt-32">
         <div className="flex justify-center">
           <div className="w-40 text-cyan-400 dark:text-white">
             <svg
@@ -51,10 +45,10 @@ const Home: NextPage = () => {
             </svg>
           </div>
         </div>
-        <h1 className="text-slate-900 font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-center dark:text-white">
+        <h1 className="text-4xl font-extrabold tracking-tight text-center text-slate-900 sm:text-5xl lg:text-6xl dark:text-white">
           WunderGraph & Next.js
         </h1>
-        <p className="mt-6 text-lg text-slate-600 text-center max-w-3xl mx-auto dark:text-slate-400">
+        <p className="max-w-3xl mx-auto mt-6 text-lg text-center text-slate-600 dark:text-slate-400">
           Use{" "}
           <code className="font-mono font-medium text-sky-500 dark:text-sky-400">
             <a
@@ -69,12 +63,12 @@ const Home: NextPage = () => {
           app.
         </p>
       </div>
-      <div className="relative flex flex-col items-center overflow-hidden p-8 sm:p-12">
-        <div className="w-full max-w-xl rounded-2xl bg-blue-50 px-20 py-14">
-          <div className="mx-auto flex max-w-sm flex-col items-center">
+      <div className="relative flex flex-col items-center p-8 overflow-hidden sm:p-12">
+        <div className="w-full max-w-xl px-20 rounded-2xl bg-blue-50 py-14">
+          <div className="flex flex-col items-center max-w-sm mx-auto">
             <p className="mt-3 mb-8 text-center text-black/80">
               This is the result of your{" "}
-              <code className="font-mono font-medium text-amber-500 font-bold">
+              <code className="font-mono font-medium font-bold text-amber-500">
                 Dragons
               </code>{" "}
               operation.
@@ -88,7 +82,7 @@ const Home: NextPage = () => {
               onClick={refresh}
               role="button"
               name="refresh"
-              className="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400"
+              className="flex items-center justify-center w-full h-12 px-6 font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 sm:w-auto dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400"
             >
               <svg
                 stroke="currentColor"

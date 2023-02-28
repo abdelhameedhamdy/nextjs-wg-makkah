@@ -9,6 +9,7 @@ import {
 import { NextJsTemplate } from "@wundergraph/nextjs/dist/template";
 import server from "./wundergraph.server";
 import operations from "./wundergraph.operations";
+import { graphql } from "graphql";
 
 const spaceX = introspect.graphql({
   apiNamespace: "spacex",

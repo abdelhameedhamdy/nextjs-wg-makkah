@@ -76,6 +76,7 @@ export interface DeedsResponseData {
 		id: number;
 		parcel_key?: string;
 		deed_no?: number;
+		deed_source?: string;
 		parcels?: {
 			area?: number;
 			length?: number;
@@ -84,11 +85,12 @@ export interface DeedsResponseData {
 }
 
 export interface DragonsResponseData {
-	spacex_dragons?: {
+	spacex_launchLatest?: {
 		id?: string;
-		name?: string;
-		active?: boolean;
-	}[];
+		details?: string;
+		mission_name?: string;
+		launch_year?: string;
+	};
 }
 
 export type UsersGetResponseData = ExtractResponse<typeof function_UsersGet>;

@@ -1,7 +1,8 @@
 query Dragons {
-	spacex_dragons {
-		id
-		name
-		active
-	}
+  spacex_launchLatest {
+    id
+    details
+    mission_name
+    launch_year
+  }
 }
