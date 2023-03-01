@@ -5,7 +5,7 @@ const Home: NextPage = () => {
   const dragons = useQuery({
     operationName: "Digitrans",
     liveQuery: true,
-    // revalidateOnFocus: false,
+    revalidateOnFocus: false,
   });
 
   const refresh = () => {
