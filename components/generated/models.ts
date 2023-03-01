@@ -88,6 +88,21 @@ export interface DigitransResponseData {
 		name: string;
 		lat?: number;
 		lon?: number;
+		vehicleMode?:
+			| "AIRPLANE"
+			| "BICYCLE"
+			| "BUS"
+			| "CABLE_CAR"
+			| "CAR"
+			| "FERRY"
+			| "FUNICULAR"
+			| "GONDOLA"
+			| "LEG_SWITCH"
+			| "RAIL"
+			| "SUBWAY"
+			| "TRAM"
+			| "TRANSIT"
+			| "WALK";
 	};
 }
 
