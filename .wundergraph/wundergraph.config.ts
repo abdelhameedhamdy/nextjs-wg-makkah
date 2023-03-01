@@ -21,9 +21,12 @@ const pg = introspect.postgresql({
   databaseURL: new EnvironmentVariable("SUPABASE_DB"),
 });
 
+const hsl = introspect.graphql({
+  url: "https://api.digitransit.fi/routing/v1/routers/finland/index/graphql/",
+});
 // configureWunderGraph emits the configuration
 configureWunderGraphApplication({
-  apis: [spaceX, pg],
+  apis: [spaceX, pg, hsl],
   server,
   operations,
   codeGenerators: [

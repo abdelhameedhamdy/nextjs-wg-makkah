@@ -46,6 +46,11 @@ export interface DeedsResponse {
 	errors?: ReadonlyArray<GraphQLError>;
 }
 
+export interface DigitransResponse {
+	data?: DigitransResponseData;
+	errors?: ReadonlyArray<GraphQLError>;
+}
+
 export interface DragonsResponse {
 	data?: DragonsResponseData;
 	errors?: ReadonlyArray<GraphQLError>;
@@ -72,16 +77,18 @@ export interface UsersUpdateResponse {
 }
 
 export interface DeedsResponseData {
-	deeds: {
-		id: number;
-		parcel_key?: string;
-		deed_no?: number;
-		deed_source?: string;
-		parcels?: {
-			area?: number;
-			length?: number;
-		};
+	db_findManydistricts: {
+		dist_aname?: string;
+		area?: number;
 	}[];
+}
+
+export interface DigitransResponseData {
+	stop?: {
+		name: string;
+		lat?: number;
+		lon?: number;
+	};
 }
 
 export interface DragonsResponseData {

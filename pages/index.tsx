@@ -1,16 +1,11 @@
 import { NextPage } from "next";
-import {
-  useQuery,
-  useSubscription,
-  withWunderGraph,
-} from "../components/generated/nextjs";
+import { useQuery, withWunderGraph } from "../components/generated/nextjs";
 
 const Home: NextPage = () => {
   const dragons = useQuery({
-    operationName: "Deeds",
-    revalidateOnFocus: false,
+    operationName: "Digitrans",
     liveQuery: true,
-    // enabled: false,
+    // revalidateOnFocus: false,
   });
 
   const refresh = () => {
@@ -69,7 +64,7 @@ const Home: NextPage = () => {
             <p className="mt-3 mb-8 text-center text-black/80">
               This is the result of your{" "}
               <code className="font-mono font-medium font-bold text-amber-500">
-                Dragons
+                Digitrans
               </code>{" "}
               operation.
             </p>

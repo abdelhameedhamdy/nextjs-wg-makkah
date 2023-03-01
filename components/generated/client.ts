@@ -18,6 +18,8 @@ import type { CustomClaims } from "./claims";
 import type {
 	DeedsResponse,
 	DeedsResponseData,
+	DigitransResponse,
+	DigitransResponseData,
 	DragonsResponse,
 	DragonsResponseData,
 	UsersGetResponse,
@@ -49,13 +51,16 @@ export interface AuthProvider {
 }
 
 export const defaultClientConfig: ClientConfig = {
-	applicationHash: "62f2e1b7",
+	applicationHash: "9e49a0c5",
 	baseURL: "http://localhost:9991",
-	sdkVersion: "0.137.1",
+	sdkVersion: "0.137.4",
 };
 
 export const operationMetadata: OperationMetadata = {
 	Deeds: {
+		requiresAuthentication: false,
+	},
+	Digitrans: {
 		requiresAuthentication: false,
 	},
 	Dragons: {
@@ -126,6 +131,12 @@ export type Queries = {
 		requiresAuthentication: false;
 		liveQuery: boolean;
 	};
+	Digitrans: {
+		input?: undefined;
+		data: DigitransResponseData;
+		requiresAuthentication: false;
+		liveQuery: boolean;
+	};
 	Dragons: {
 		input?: undefined;
 		data: DragonsResponseData;
@@ -165,6 +176,12 @@ export type LiveQueries = {
 	Deeds: {
 		input?: undefined;
 		data: DeedsResponseData;
+		liveQuery: true;
+		requiresAuthentication: false;
+	};
+	Digitrans: {
+		input?: undefined;
+		data: DigitransResponseData;
 		liveQuery: true;
 		requiresAuthentication: false;
 	};
