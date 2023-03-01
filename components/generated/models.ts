@@ -103,6 +103,7 @@ export interface DigitransResponseData {
 			| "TRAM"
 			| "TRANSIT"
 			| "WALK";
+		locationType?: "ENTRANCE" | "STATION" | "STOP";
 	};
 }
 

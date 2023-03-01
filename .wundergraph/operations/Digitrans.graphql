@@ -4,5 +4,6 @@ query {
     lat
     lon
     vehicleMode
+    locationType
   }
 }
