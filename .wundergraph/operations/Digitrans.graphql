@@ -1,9 +1,0 @@
-query {
-  stop(id: "HSL:6150219") {
-    name
-    lat
-    lon
-    vehicleMode
-    locationType
-  }
-}

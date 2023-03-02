@@ -46,13 +46,13 @@ export interface DeedsResponse {
 	errors?: ReadonlyArray<GraphQLError>;
 }
 
-export interface DigitransResponse {
-	data?: DigitransResponseData;
+export interface DragonsResponse {
+	data?: DragonsResponseData;
 	errors?: ReadonlyArray<GraphQLError>;
 }
 
-export interface DragonsResponse {
-	data?: DragonsResponseData;
+export interface LocationResponse {
+	data?: LocationResponseData;
 	errors?: ReadonlyArray<GraphQLError>;
 }
 
@@ -77,34 +77,21 @@ export interface UsersUpdateResponse {
 }
 
 export interface DeedsResponseData {
-	db_findManydistricts: {
-		dist_aname?: string;
-		area?: number;
+	deeds: {
+		deed_no?: number;
+		deed_source?: string;
+		owner_type?: string;
+		deed_date?: string;
+		parcel_key?: string;
+		east?: string;
+		south?: string;
+		west?: string;
+		north?: string;
+		parcels?: {
+			area?: number;
+			length?: number;
+		};
 	}[];
-}
-
-export interface DigitransResponseData {
-	stop?: {
-		name: string;
-		lat?: number;
-		lon?: number;
-		vehicleMode?:
-			| "AIRPLANE"
-			| "BICYCLE"
-			| "BUS"
-			| "CABLE_CAR"
-			| "CAR"
-			| "FERRY"
-			| "FUNICULAR"
-			| "GONDOLA"
-			| "LEG_SWITCH"
-			| "RAIL"
-			| "SUBWAY"
-			| "TRAM"
-			| "TRANSIT"
-			| "WALK";
-		locationType?: "ENTRANCE" | "STATION" | "STOP";
-	};
 }
 
 export interface DragonsResponseData {
@@ -113,6 +100,25 @@ export interface DragonsResponseData {
 		details?: string;
 		mission_name?: string;
 		launch_year?: string;
+	};
+}
+
+export interface LocationResponseData {
+	getVehicleActivity?: {
+		body?: {
+			monitoredVehicleJourney?: {
+				originShortName?: string;
+				bearing?: string;
+				speed?: string;
+				vehicleLocation?: {
+					latitude?: string;
+					longitude?: string;
+				};
+				directionRef?: string;
+				operatorRef?: string;
+				vehicleRef?: string;
+			};
+		}[];
 	};
 }
 

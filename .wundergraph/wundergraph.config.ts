@@ -21,12 +21,20 @@ const pg = introspect.postgresql({
   databaseURL: new EnvironmentVariable("SUPABASE_DB"),
 });
 
-const hsl = introspect.graphql({
-  url: "https://api.digitransit.fi/routing/v1/routers/finland/index/graphql/",
+const digitraffic = introspect.graphql({
+  url: "https://rata.digitraffic.fi/api/v2/graphql/graphql/",
+});
+
+const notes = introspect.openApi({
+  source: {
+    kind: "file",
+    filePath: "./openapi.yaml",
+  },
+  //baseURL: "http://localhost:8090/",
 });
 // configureWunderGraph emits the configuration
 configureWunderGraphApplication({
-  apis: [spaceX, pg, hsl],
+  apis: [spaceX, pg, notes],
   server,
   operations,
   codeGenerators: [

@@ -18,10 +18,10 @@ import type { CustomClaims } from "./claims";
 import type {
 	DeedsResponse,
 	DeedsResponseData,
-	DigitransResponse,
-	DigitransResponseData,
 	DragonsResponse,
 	DragonsResponseData,
+	LocationResponse,
+	LocationResponseData,
 	UsersGetResponse,
 	UsersGetInput,
 	UsersGetResponseData,
@@ -51,7 +51,7 @@ export interface AuthProvider {
 }
 
 export const defaultClientConfig: ClientConfig = {
-	applicationHash: "02d076f9",
+	applicationHash: "d342d16a",
 	baseURL: "http://localhost:9991",
 	sdkVersion: "0.137.4",
 };
@@ -60,10 +60,10 @@ export const operationMetadata: OperationMetadata = {
 	Deeds: {
 		requiresAuthentication: false,
 	},
-	Digitrans: {
+	Dragons: {
 		requiresAuthentication: false,
 	},
-	Dragons: {
+	Location: {
 		requiresAuthentication: false,
 	},
 	"users/get": {
@@ -131,15 +131,15 @@ export type Queries = {
 		requiresAuthentication: false;
 		liveQuery: boolean;
 	};
-	Digitrans: {
-		input?: undefined;
-		data: DigitransResponseData;
-		requiresAuthentication: false;
-		liveQuery: boolean;
-	};
 	Dragons: {
 		input?: undefined;
 		data: DragonsResponseData;
+		requiresAuthentication: false;
+		liveQuery: boolean;
+	};
+	Location: {
+		input?: undefined;
+		data: LocationResponseData;
 		requiresAuthentication: false;
 		liveQuery: boolean;
 	};
@@ -179,15 +179,15 @@ export type LiveQueries = {
 		liveQuery: true;
 		requiresAuthentication: false;
 	};
-	Digitrans: {
-		input?: undefined;
-		data: DigitransResponseData;
-		liveQuery: true;
-		requiresAuthentication: false;
-	};
 	Dragons: {
 		input?: undefined;
 		data: DragonsResponseData;
+		liveQuery: true;
+		requiresAuthentication: false;
+	};
+	Location: {
+		input?: undefined;
+		data: LocationResponseData;
 		liveQuery: true;
 		requiresAuthentication: false;
 	};

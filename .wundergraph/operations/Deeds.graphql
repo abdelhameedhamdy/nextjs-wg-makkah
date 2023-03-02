@@ -1,6 +1,17 @@
 query {
-  db_findManydistricts(take: 4) {
-    dist_aname
-    area: shape_area
+  deeds: db_findManydeeds {
+    deed_no
+    deed_source
+    owner_type
+    deed_date
+    parcel_key
+    east
+    south
+    west
+    north
+    parcels {
+      area: shape_area
+      length: shape_len
+    }
   }
 }
