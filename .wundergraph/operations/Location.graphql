@@ -1,0 +1,18 @@
+query {
+  getVehicleActivity {
+    body {
+      monitoredVehicleJourney {
+        originShortName
+        bearing
+        speed
+        vehicleLocation {
+          latitude
+          longitude
+        }
+        directionRef
+        operatorRef
+        vehicleRef
+      }
+    }
+  }
+}
