@@ -1,6 +1,7 @@
 query {
   getVehicleActivity {
     body {
+      time: recordedAtTime
       monitoredVehicleJourney {
         originShortName
         bearing
@@ -12,6 +13,7 @@ query {
         directionRef
         operatorRef
         vehicleRef
+        lineRef
       }
     }
   }

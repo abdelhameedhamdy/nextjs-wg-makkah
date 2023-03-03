@@ -1,21 +1,55 @@
 import { NextPage } from "next";
 import { useQuery, withWunderGraph } from "../components/generated/nextjs";
+import Map, { Layer, MapRef, Marker, Popup, Source } from "react-map-gl";
+import maplibregl from "maplibre-gl";
+import Pin from "components/pin";
+import { ReactFragment, useCallback, useMemo, useRef, useState } from "react";
+import {
+  LocationResponse,
+  LocationResponseData,
+} from ".wundergraph/generated/models";
+import mapboxgl from "mapbox-gl";
+
+type Info = {
+  feature: {
+    time?: string;
+    monitoredVehicleJourney?: {
+      originShortName?: string;
+      bearing?: string;
+      speed?: string;
+      vehicleLocation?: {
+        latitude?: string;
+        longitude?: string;
+      };
+      directionRef?: string;
+      operatorRef?: string;
+      vehicleRef?: string;
+      lineRef?: string;
+    };
+  };
+  x: number;
+  y: number;
+};
 
 const Home: NextPage = () => {
+  const [popupInfo, setPopupInfo] = useState<Info | null>(null);
+
   const dragons = useQuery({
     operationName: "Location",
     liveQuery: true,
     revalidateOnFocus: false,
+    enabled: true,
   });
 
   const refresh = () => {
     dragons.mutate();
   };
+
   return (
     <div>
       <div className="relative max-w-5xl pt-20 mx-auto sm:pt-24 lg:pt-32">
         <div className="flex justify-center">
-          <div className="w-40 text-cyan-400 dark:text-white">
+          <div className="w-50 text-cyan-400 dark:text-white">
             <svg
               version="1.1"
               id="Layer_1"
@@ -59,40 +93,84 @@ const Home: NextPage = () => {
         </p>
       </div>
       <div className="relative flex flex-col items-center p-8 overflow-hidden sm:p-12">
-        <div className="w-full max-w-xl px-20 rounded-2xl bg-blue-50 py-14">
+        <div className="w-full max-w-2xl px-20 py-6 rounded-2xl bg-blue-50">
           <div className="flex flex-col items-center max-w-sm mx-auto">
             <p className="mt-3 mb-8 text-center text-black/80">
               This is the result of your{" "}
               <code className="font-mono font-medium font-bold text-amber-500">
-                Digitrans
+                Location
               </code>{" "}
               operation.
             </p>
-            <code className="p-3" data-testid="result">
-              {JSON.stringify(dragons.data, null, 2)}
-            </code>
-          </div>
-          <div className="flex justify-center mt-8">
-            <button
-              onClick={refresh}
-              role="button"
-              name="refresh"
-              className="flex items-center justify-center w-full h-12 px-6 font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 sm:w-auto dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400"
-            >
-              <svg
-                stroke="currentColor"
-                fill="currentColor"
-                strokeWidth="0"
-                viewBox="0 0 24 24"
-                className="w-6 h-6 mr-2 -ml-1"
-                height="1em"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
+            <div className="overflow-hidden border-2 border-amber-500 rounded-2xl">
+              <Map
+                mapLib={maplibregl}
+                initialViewState={{
+                  latitude: 61.495304,
+                  longitude: 23.770809,
+                  zoom: 10,
+                }}
+                // mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
+                // mapStyle="mapbox://styles/mapbox/streets-v9"
+                mapStyle="https://api.maptiler.com/maps/openstreetmap/style.json?key=UcrAb2Y21ncvJA6R54Hn"
+                style={{ width: 600, height: 400 }}
+                attributionControl={false}
               >
-                <path d="M10 11H7.101l.001-.009a4.956 4.956 0 0 1 .752-1.787 5.054 5.054 0 0 1 2.2-1.811c.302-.128.617-.226.938-.291a5.078 5.078 0 0 1 2.018 0 4.978 4.978 0 0 1 2.525 1.361l1.416-1.412a7.036 7.036 0 0 0-2.224-1.501 6.921 6.921 0 0 0-1.315-.408 7.079 7.079 0 0 0-2.819 0 6.94 6.94 0 0 0-1.316.409 7.04 7.04 0 0 0-3.08 2.534 6.978 6.978 0 0 0-1.054 2.505c-.028.135-.043.273-.063.41H2l4 4 4-4zm4 2h2.899l-.001.008a4.976 4.976 0 0 1-2.103 3.138 4.943 4.943 0 0 1-1.787.752 5.073 5.073 0 0 1-2.017 0 4.956 4.956 0 0 1-1.787-.752 5.072 5.072 0 0 1-.74-.61L7.05 16.95a7.032 7.032 0 0 0 2.225 1.5c.424.18.867.317 1.315.408a7.07 7.07 0 0 0 2.818 0 7.031 7.031 0 0 0 4.395-2.945 6.974 6.974 0 0 0 1.053-2.503c.027-.135.043-.273.063-.41H22l-4-4-4 4z"></path>
-              </svg>
-              Refresh
-            </button>
+                {dragons.data &&
+                  dragons.data.getVehicleActivity?.body?.map(
+                    (location, index) => {
+                      const { vehicleLocation, bearing, lineRef } =
+                        location.monitoredVehicleJourney!;
+                      return (
+                        <Marker
+                          key={`marker-${index}`}
+                          longitude={Number(vehicleLocation?.longitude)}
+                          latitude={Number(vehicleLocation?.latitude)}
+                          rotation={Number(bearing)}
+                        >
+                          <Pin
+                            onMouseMove={(e) => {
+                              // e.stopPropagation();
+                              //@ts-ignore
+                              const { layerX: x, layerY: y } = e.nativeEvent;
+
+                              setPopupInfo(
+                                location && {
+                                  feature: location,
+                                  x,
+                                  y,
+                                }
+                              );
+                            }}
+                            onMouseOut={() => setPopupInfo(null)}
+                          />
+                        </Marker>
+                      );
+                    }
+                  )}
+                {popupInfo && (
+                  <div
+                    className="absolute z-10 p-1 m-2 text-white bg-orange-400 rounded-md shadow-md pointer-events-none"
+                    style={{ left: popupInfo.x, top: popupInfo.y }}
+                  >
+                    <div>
+                      <p>
+                        speed:{" "}
+                        {popupInfo.feature.monitoredVehicleJourney?.speed} km/h
+                        - lineRef:{" "}
+                        {popupInfo.feature.monitoredVehicleJourney?.lineRef}
+                      </p>
+                      <p>
+                        time:{" "}
+                        {new Date(
+                          popupInfo.feature?.time!
+                        ).toLocaleTimeString()}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </Map>
+            </div>
           </div>
         </div>
         <footer className="flex justify-between text-gray-400">

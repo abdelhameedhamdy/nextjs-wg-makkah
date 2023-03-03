@@ -1,4 +1,6 @@
 import "../styles/globals.css";
+import "maplibre-gl/dist/maplibre-gl.css";
+// import "mapbox-gl/dist/mapbox-gl.css";
 import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {

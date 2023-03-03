@@ -106,6 +106,7 @@ export interface DragonsResponseData {
 export interface LocationResponseData {
 	getVehicleActivity?: {
 		body?: {
+			time?: string;
 			monitoredVehicleJourney?: {
 				originShortName?: string;
 				bearing?: string;
@@ -117,6 +118,7 @@ export interface LocationResponseData {
 				directionRef?: string;
 				operatorRef?: string;
 				vehicleRef?: string;
+				lineRef?: string;
 			};
 		}[];
 	};
